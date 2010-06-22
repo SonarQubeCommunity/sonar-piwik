@@ -1,0 +1,78 @@
+/*
+ * Sonar, open source software quality management tool.
+ * Copyright (C) 2010 Intelliware Development Inc.
+ * mailto:contact AT sonarsource DOT com
+ *
+ * Sonar is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * Sonar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with Sonar; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ */
+
+package org.sonar.plugins.piwik;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.sonar.api.Extension;
+import org.sonar.api.Plugin;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
+
+@Properties( { @Property(key = PiwikPlugin.PIWIK_WEBSITEID_PROPERTY, name = "Website ID", description = "Example : 2"),
+    @Property(key = PiwikPlugin.PIWIK_SERVER_PROPERTY, name = "Server host name", description = "Example : piwik.mycompany.com"),
+    @Property(key = PiwikPlugin.PIWIK_PATH_PROPERTY, name = "Path on server", description = "Example : piwik") })
+/**
+ * Sonar plug-in to collect usage information of a Sonar instance with the
+ * piwik open-source web analytics software. It must be configured with
+ * location of the Piwik instance and the id of a website to which web
+ * traffic will be associated with.
+ * 
+ * For more information see: http://piwik.org/
+ * 
+ * @author <a href="mailto:david@intelliware.ca">David Jones</a>
+ */
+public class PiwikPlugin implements Plugin {
+
+  public static final String PIWIK_WEBSITEID_PROPERTY = "org.sonar.plugins.piwik.website-id";
+  public static final String PIWIK_SERVER_PROPERTY = "org.sonar.plugins.piwik.server";
+  public static final String PIWIK_PATH_PROPERTY = "org.sonar.plugins.piwik.path";
+
+  public static final String PIWIK_PLUGIN = "org.sonar.plugins.piwik";
+
+  public PiwikPlugin() {
+    super();
+  }
+
+  public String getKey() {
+    return PIWIK_PLUGIN;
+  }
+
+  public String getName() {
+    return "Piwik";
+  }
+
+  public String getDescription() {
+    return "Piwik is an open-source web analytics tool that collects data on the traffic of web sites and then, through a powerful interface, enables access to reporting, goals, charts, and more. You can learn more by visiting the <a href='http://piwik.org/'>Piwik web site</a>.";
+  }
+
+  public List<Class<? extends Extension>> getExtensions() {
+    List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
+    list.add(PiwikWebFooter.class);
+    return list;
+  }
+
+  @Override
+  public String toString() {
+    return getKey();
+  }
+}
