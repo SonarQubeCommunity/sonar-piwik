@@ -8,12 +8,12 @@
     <artifactId>parent</artifactId>
     <version>5</version>
   </parent>
- 
+
   <groupId>org.codehaus.sonar-plugins</groupId>
   <artifactId>sonar-piwik-plugin</artifactId>
   <packaging>jar</packaging>
   <version>0.1-SNAPSHOT</version>
-  <name>Piwik Analytics</name>
+  <name>Sonar Piwik Plugin</name>
 
   <properties>
     <sonar.plugin.class>org.sonar.plugins.piwik.PiwikPlugin</sonar.plugin.class>
@@ -28,7 +28,7 @@
   <scm>
     <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/piwik</connection>
     <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/piwik</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org</url>
+    <url>http://svn.sonar-plugins.codehaus.org/browse/sonar-plugins/trunk/piwik</url>
   </scm>
 
   <inceptionYear>2010</inceptionYear>
@@ -43,6 +43,16 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+
+  <developers>
+    <developer>
+      <name>David Jones</name>
+      <email>david@intelliware.ca</email>
+      <url>http://i-proving.ca/space/David+Jones</url>
+      <organization>Intelliware Development Inc.</organization>
+      <timezone>-5</timezone>
+    </developer>
+  </developers>
 
   <dependencies>
     <dependency>
