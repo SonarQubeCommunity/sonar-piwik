@@ -56,23 +56,28 @@ public class PiwikWebFooter implements Footer {
 
   public String getHtml() {
     String id = getIdAccount();
-    if (id != null && !"".equals(id)) {
+    String server = getServer();
+    if (id != null && !"".equals(id) && server != null && !"".equals(server)) {
       String serverPath = getServerPath();
-      return "<!-- Piwik -->\r\n" + "<script type=\"text/javascript\">\r\n"
+      return "<!-- Piwik -->\n" + "<script type=\"text/javascript\">\n"
           + "var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://" + serverPath + "/\" : \"http://" + serverPath
-          + "/\");\r\n"
-          + "document.write(unescape(\"%3Cscript src='\" + pkBaseURL + \"piwik.js' type='text/javascript'%3E%3C/script%3E\"));\r\n"
-          + "</script><script type=\"text/javascript\">\r\n" + "try {\r\n"
-          + "var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", " + id + ");\r\n" + "piwikTracker.trackPageView();\r\n"
-          + "piwikTracker.enableLinkTracking();\r\n" + "} catch( err ) {}\r\n" + "</script><noscript><p><img src=\"http://" + serverPath
-          + "/piwik.php?idsite=" + id + "\" style=\"border:0\" alt=\"\"/></p></noscript>\r\n" + "<!-- End Piwik Tag -->";
+          + "/\");\n"
+          + "document.write(unescape(\"%3Cscript src='\" + pkBaseURL + \"piwik.js' type='text/javascript'%3E%3C/script%3E\"));\n"
+          + "</script><script type=\"text/javascript\">\n" + "try {\n" + "var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", "
+          + id + ");\n" + "piwikTracker.trackPageView();\n" + "piwikTracker.enableLinkTracking();\n" + "} catch( err ) {}\n"
+          + "</script><noscript><p><img src=\"http://" + serverPath + "/piwik.php?idsite=" + id
+          + "\" style=\"border:0\" alt=\"\"/></p></noscript>\n" + "<!-- End Piwik Tag -->";
     } else {
       return null;
     }
   }
 
   private String getServerPath() {
-    return getServer() + "/" + getPath();
+    String serverPath = getServer();
+    if (getPath() != null && !"".equals(getPath())) {
+      serverPath += "/" + getPath();
+    }
+    return serverPath;
   }
 
   @Override

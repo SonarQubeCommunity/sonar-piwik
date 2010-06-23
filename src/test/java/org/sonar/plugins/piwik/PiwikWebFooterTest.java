@@ -43,28 +43,47 @@ public class PiwikWebFooterTest {
   }
 
   @Test
-  public void shouldSkipOutputWhenWebsiteIdNotSet() {
+  public void shouldSkipOutputWhenWebsiteIdOrServerMissing() {
     PiwikWebFooter subject = new PiwikWebFooter(configuration);
     assertThat(subject.getHtml(), nullValue());
   }
 
   @Test
-  public void shouldIncludePiwikScriptWhenWebsiteIdPresent() {
+  public void shouldIncludePiwikScriptWhenWebsiteIdAndServerPresent() {
     withValidWebsiteId();
+    withServer("server.com");
 
     PiwikWebFooter subject = new PiwikWebFooter(configuration);
     assertThat(subject.getHtml(), notNullValue());
+  }
+
+  private void withServer(String server) {
+    when(configuration.getString(eq(PiwikPlugin.PIWIK_SERVER_PROPERTY), anyString())).thenReturn(server);
   }
 
   @Test
   public void shouldBuildServerPathFromServerAndPath() {
     withValidWebsiteId();
 
-    when(configuration.getString(eq(PiwikPlugin.PIWIK_SERVER_PROPERTY), anyString())).thenReturn("server.com");
-    when(configuration.getString(eq(PiwikPlugin.PIWIK_PATH_PROPERTY), anyString())).thenReturn("test/path");
+    withServer("server.com");
+    withRelativePath("test/path");
 
     PiwikWebFooter subject = new PiwikWebFooter(configuration);
-    assertThat(subject.getHtml(), containsString("http://server.com/test/path/"));
+    assertThat(subject.getHtml(), containsString("\"http://server.com/test/path/\""));
+  }
+
+  @Test
+  public void shouldBeOptionalToProvidePath() {
+    withValidWebsiteId();
+
+    withServer("server.com");
+
+    PiwikWebFooter subject = new PiwikWebFooter(configuration);
+    assertThat(subject.getHtml(), containsString("\"http://server.com/\""));
+  }
+
+  private void withRelativePath(String path) {
+    when(configuration.getString(eq(PiwikPlugin.PIWIK_PATH_PROPERTY), anyString())).thenReturn(path);
   }
 
   private void withValidWebsiteId() {

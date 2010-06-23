@@ -28,12 +28,13 @@ import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 
-@Properties( { @Property(key = PiwikPlugin.PIWIK_WEBSITEID_PROPERTY, name = "Website ID", description = "Example : 2"),
-    @Property(key = PiwikPlugin.PIWIK_SERVER_PROPERTY, name = "Server host name", description = "Example : piwik.mycompany.com"),
-    @Property(key = PiwikPlugin.PIWIK_PATH_PROPERTY, name = "Path on server", description = "Example : piwik") })
+@Properties( {
+    @Property(key = PiwikPlugin.PIWIK_WEBSITEID_PROPERTY, name = "Website ID", description = "Example : 2"),
+    @Property(key = PiwikPlugin.PIWIK_SERVER_PROPERTY, name = "Piwik Server", description = "Example : piwik.mycompany.com or 192.168.1.2"),
+    @Property(key = PiwikPlugin.PIWIK_PATH_PROPERTY, name = "Relative Path on Server", description = "Example : piwik-0.6 when URL is http://piwik.mycompany.com/piwik-0.6/index.php or may be empty when Piwik is running at the root of the server") })
 /**
  * Sonar plug-in to collect usage information of a Sonar instance with the
- * piwik open-source web analytics software. It must be configured with
+ * Piwik open-source web analytics software. It must be configured with
  * location of the Piwik instance and the id of a website to which web
  * traffic will be associated with.
  * 
