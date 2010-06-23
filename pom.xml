@@ -14,8 +14,9 @@
   <packaging>jar</packaging>
   <version>0.1-SNAPSHOT</version>
   <name>Sonar Piwik Plugin</name>
-  <description>Piwik (http://piwik.org/) is an open-source web analytics software that can be used as an alternative to Google Analytics,
-  especially for internal websites. The Piwik Plugin submits web usage of a Sonar instance to a Piwik server.</description>
+  <description>Piwik (http://piwik.org/) is an open-source web analytics software that can be 
+  used as an alternative to Google Analytics, in particular for internal websites. The Piwik Plugin 
+  submits individual's browsing activity of the Sonar instance to a Piwik server.</description>
 
   <properties>
     <sonar.plugin.class>org.sonar.plugins.piwik.PiwikPlugin</sonar.plugin.class>
