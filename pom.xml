@@ -36,6 +36,11 @@
     <url>http://svn.sonar-plugins.codehaus.org/browse/sonar-plugins/trunk/piwik</url>
   </scm>
 
+  <ciManagement>
+    <system>bamboo</system>
+    <url>http://bamboo.ci.codehaus.org/browse/SONAR-PIWIK</url>
+  </ciManagement>
+
   <inceptionYear>2010</inceptionYear>
   <organization>
     <name>Intelliware Development Inc.</name>
