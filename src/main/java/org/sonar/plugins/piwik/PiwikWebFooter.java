@@ -20,13 +20,14 @@
 package org.sonar.plugins.piwik;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.StringUtils;
 import org.sonar.api.web.Footer;
 
 /**
  * Attach the Piwik javascript tracking tag before the close of the body tag for each page of the site.
- * 
+ * <p/>
  * For more information see: http://piwik.org/docs/javascript-tracking/
- * 
+ *
  * @author <a href="mailto:david@intelliware.ca">David Jones</a>
  */
 public class PiwikWebFooter implements Footer {
@@ -56,19 +57,18 @@ public class PiwikWebFooter implements Footer {
   public String getHtml() {
     String id = getIdAccount();
     String server = getServer();
-    if (id != null && !"".equals(id) && server != null && !"".equals(server)) {
-      String serverPath = getServerPath();
-      return "<!-- Piwik -->\n" + "<script type=\"text/javascript\">\n"
-          + "var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://" + serverPath + "/\" : \"http://" + serverPath
-          + "/\");\n"
-          + "document.write(unescape(\"%3Cscript src='\" + pkBaseURL + \"piwik.js' type='text/javascript'%3E%3C/script%3E\"));\n"
-          + "</script><script type=\"text/javascript\">\n" + "try {\n" + "var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", "
-          + id + ");\n" + "piwikTracker.trackPageView();\n" + "piwikTracker.enableLinkTracking();\n" + "} catch( err ) {}\n"
-          + "</script><noscript><p><img src=\"http://" + serverPath + "/piwik.php?idsite=" + id
-          + "\" style=\"border:0\" alt=\"\"/></p></noscript>\n" + "<!-- End Piwik Tag -->";
-    } else {
+    if (StringUtils.isBlank(id) || StringUtils.isBlank(server)) {
       return null;
     }
+    String serverPath = getServerPath();
+    return "<!-- Piwik -->\n" + "<script type=\"text/javascript\">\n"
+        + "var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://" + serverPath + "/\" : \"http://" + serverPath
+        + "/\");\n"
+        + "document.write(unescape(\"%3Cscript src='\" + pkBaseURL + \"piwik.js' type='text/javascript'%3E%3C/script%3E\"));\n"
+        + "</script><script type=\"text/javascript\">\n" + "try {\n" + "var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", "
+        + id + ");\n" + "piwikTracker.trackPageView();\n" + "piwikTracker.enableLinkTracking();\n" + "} catch( err ) {}\n"
+        + "</script><noscript><p><img src=\"http://" + serverPath + "/piwik.php?idsite=" + id
+        + "\" style=\"border:0\" alt=\"\"/></p></noscript>\n" + "<!-- End Piwik Tag -->";
   }
 
   private String getServerPath() {
