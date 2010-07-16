@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins</groupId>
     <artifactId>parent</artifactId>
-    <version>5</version>
+    <version>6</version>
     <relativePath>../parent</relativePath>
   </parent>
 
@@ -20,7 +20,7 @@
   submits individual's browsing activity of the Sonar instance to a Piwik server.</description>
 
   <properties>
-    <sonar.plugin.class>org.sonar.plugins.piwik.PiwikPlugin</sonar.plugin.class>
+    <sonar.pluginClass>org.sonar.plugins.piwik.PiwikPlugin</sonar.pluginClass>
     <sonar.version>2.1</sonar.version>
   </properties>
 
@@ -71,51 +71,12 @@
       <scope>provided</scope>
     </dependency>
 
-    <!--
-
-      IMPORTANT : only dependencies with test scope can be added to
-      plugins.
-    -->
-
     <!-- unit tests -->
     <dependency>
       <groupId>org.codehaus.sonar</groupId>
-      <artifactId>sonar-plugin-api</artifactId>
+      <artifactId>sonar-testing-harness</artifactId>
       <version>${sonar.version}</version>
-      <scope>test</scope>
-      <type>test-jar</type>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.7</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>1.8.5</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-all</artifactId>
-      <version>1.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.sonar</groupId>
-        <artifactId>sonar-dev-mojo</artifactId>
-        <extensions>true</extensions>
-        <version>2.2M1</version>
-        <configuration>
-          <pluginClass>${sonar.plugin.class}</pluginClass>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>
