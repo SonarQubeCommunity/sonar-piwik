@@ -12,7 +12,7 @@
   <groupId>org.codehaus.sonar-plugins</groupId>
   <artifactId>sonar-piwik-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <name>Sonar Piwik Plugin</name>
   <url>http://docs.codehaus.org/display/SONAR/piwik+plugin</url>
   <description>Piwik (http://piwik.org/) is an open-source web analytics software that can be 
@@ -30,9 +30,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/tags/sonar-piwik-plugin-1.0</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/sonar-piwik-plugin-1.0</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org/browse/sonar-plugins/tags/sonar-piwik-plugin-1.0</url>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/piwik</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/piwik</developerConnection>
+    <url>http://svn.sonar-plugins.codehaus.org/browse/sonar-plugins/trunk/piwik</url>
   </scm>
 
   <ciManagement>
