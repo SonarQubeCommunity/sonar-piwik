@@ -13,33 +13,12 @@
   <artifactId>sonar-piwik-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
   <version>1.1-SNAPSHOT</version>
+
   <name>Sonar Piwik Plugin</name>
-  <url>http://docs.codehaus.org/display/SONAR/piwik+plugin</url>
   <description>Piwik (http://piwik.org/) is an open-source web analytics software that can be 
   used as an alternative to Google Analytics, in particular for internal websites. The Piwik Plugin 
   submits individual's browsing activity of the Sonar instance to a Piwik server.</description>
-
-  <properties>
-    <sonar.pluginClass>org.sonar.plugins.piwik.PiwikPlugin</sonar.pluginClass>
-    <sonar.version>2.1</sonar.version>
-  </properties>
-
-  <issueManagement>
-    <system>JIRA</system>
-    <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/14465</url>
-  </issueManagement>
-
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/piwik</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/piwik</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org/browse/sonar-plugins/trunk/piwik</url>
-  </scm>
-
-  <ciManagement>
-    <system>bamboo</system>
-    <url>http://bamboo.ci.codehaus.org/browse/SONAR-PIWIK</url>
-  </ciManagement>
-
+  <url>http://docs.codehaus.org/display/SONAR/piwik+plugin</url>
   <inceptionYear>2010</inceptionYear>
   <organization>
     <name>Intelliware Development Inc.</name>
@@ -62,6 +41,26 @@
       <timezone>-5</timezone>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/piwik</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/piwik</developerConnection>
+    <url>http://svn.sonar-plugins.codehaus.org/browse/sonar-plugins/trunk/piwik</url>
+  </scm>
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/14465</url>
+  </issueManagement>
+  <ciManagement>
+    <system>bamboo</system>
+    <url>http://bamboo.ci.codehaus.org/browse/SONAR-PIWIK</url>
+  </ciManagement>
+
+  <properties>
+    <sonar.pluginClass>org.sonar.plugins.piwik.PiwikPlugin</sonar.pluginClass>
+    <sonar.pluginName>Piwik</sonar.pluginName>
+    <sonar.version>2.1</sonar.version>
+  </properties>
 
   <dependencies>
     <dependency>
