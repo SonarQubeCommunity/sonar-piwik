@@ -43,9 +43,9 @@
   </developers>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/piwik</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/piwik</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org/browse/sonar-plugins/trunk/piwik</url>
+    <connection>scm:git:git@github.com:SonarSource/sonar-piwik.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarSource/sonar-piwik.git</developerConnection>
+    <url>https://github.com/Sonarcommunity/sonar-piwik</url>
   </scm>
   <issueManagement>
     <system>JIRA</system>
