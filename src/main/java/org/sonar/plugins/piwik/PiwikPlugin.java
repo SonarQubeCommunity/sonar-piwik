@@ -20,15 +20,15 @@
 package org.sonar.plugins.piwik;
 
 import org.sonar.api.Extension;
-import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.api.SonarPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Sonar plug-in to collect usage information of a Sonar instance with the
+ * Sonar plug-in to collect usage information of a SonarQube instance with the
  * Piwik open-source web analytics software. It must be configured with
  * location of the Piwik instance and the id of a website to which web
  * traffic will be associated with.
@@ -38,57 +38,34 @@ import java.util.List;
  * @author <a href="mailto:david@intelliware.ca">David Jones</a>
  */
 @Properties({
-    @Property(
-        key = PiwikPlugin.PIWIK_WEBSITEID_PROPERTY,
-        name = "Website ID",
-        description = "Example : 2"
-    ),
-    @Property(
-        key = PiwikPlugin.PIWIK_SERVER_PROPERTY,
-        name = "Piwik Server",
-        description = "Example : piwik.mycompany.com or 192.168.1.2"
-    ),
-    @Property(
-        key = PiwikPlugin.PIWIK_PATH_PROPERTY,
-        name = "Relative Path on Server",
-        description = "Example : piwik-0.6 when URL is http://piwik.mycompany.com/piwik-0.6/index.php" +
-            " or may be empty when Piwik is running at the root of the server"
-    )
+  @Property(
+    key = PiwikPlugin.PIWIK_WEBSITEID_PROPERTY,
+    name = "Website ID",
+    description = "Example : 2"
+  ),
+  @Property(
+    key = PiwikPlugin.PIWIK_SERVER_PROPERTY,
+    name = "Piwik Server",
+    description = "Example : piwik.mycompany.com or 192.168.1.2"
+  ),
+  @Property(
+    key = PiwikPlugin.PIWIK_PATH_PROPERTY,
+    name = "Relative Path on Server",
+    description = "Example : piwik-0.6 when URL is http://piwik.mycompany.com/piwik-0.6/index.php" +
+      " or may be empty when Piwik is running at the root of the server"
+  )
 })
-public class PiwikPlugin implements Plugin {
+public class PiwikPlugin extends SonarPlugin {
 
   public static final String PIWIK_WEBSITEID_PROPERTY = "org.sonar.plugins.piwik.website-id";
   public static final String PIWIK_SERVER_PROPERTY = "org.sonar.plugins.piwik.server";
   public static final String PIWIK_PATH_PROPERTY = "org.sonar.plugins.piwik.path";
 
-  public static final String PIWIK_PLUGIN = "org.sonar.plugins.piwik";
-
-  public PiwikPlugin() {
-    super();
-  }
-
-  public String getKey() {
-    return PIWIK_PLUGIN;
-  }
-
-  public String getName() {
-    return "Piwik";
-  }
-
-  public String getDescription() {
-    return "Piwik is an open-source web analytics tool that collects data on the traffic of web sites and then," +
-        " through a powerful interface, enables access to reporting, goals, charts, and more." +
-        " You can learn more by visiting the <a href='http://piwik.org/'>Piwik web site</a>.";
-  }
-
+  @Override
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(PiwikWebFooter.class);
     return list;
   }
 
-  @Override
-  public String toString() {
-    return getKey();
-  }
 }

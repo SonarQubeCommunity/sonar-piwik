@@ -19,31 +19,28 @@
  */
 package org.sonar.plugins.piwik;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.api.config.PropertyDefinitions;
+import org.sonar.api.config.Settings;
+
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import org.apache.commons.configuration.Configuration;
-import org.junit.Before;
-import org.junit.Test;
 
 public class PiwikWebFooterTest {
 
-  private Configuration configuration;
+  private Settings settings;
 
   @Before
   public void setUp() {
-    configuration = mock(Configuration.class);
+    settings = new Settings(new PropertyDefinitions(PiwikPlugin.class));
   }
 
   @Test
   public void shouldSkipOutputWhenWebsiteIdOrServerMissing() {
-    PiwikWebFooter subject = new PiwikWebFooter(configuration);
+    PiwikWebFooter subject = new PiwikWebFooter(settings);
     assertThat(subject.getHtml(), nullValue());
   }
 
@@ -52,12 +49,12 @@ public class PiwikWebFooterTest {
     withValidWebsiteId();
     withServer("server.com");
 
-    PiwikWebFooter subject = new PiwikWebFooter(configuration);
+    PiwikWebFooter subject = new PiwikWebFooter(settings);
     assertThat(subject.getHtml(), notNullValue());
   }
 
   private void withServer(String server) {
-    when(configuration.getString(eq(PiwikPlugin.PIWIK_SERVER_PROPERTY), anyString())).thenReturn(server);
+    settings.setProperty(PiwikPlugin.PIWIK_SERVER_PROPERTY, server);
   }
 
   @Test
@@ -67,7 +64,7 @@ public class PiwikWebFooterTest {
     withServer("server.com");
     withRelativePath("test/path");
 
-    PiwikWebFooter subject = new PiwikWebFooter(configuration);
+    PiwikWebFooter subject = new PiwikWebFooter(settings);
     assertThat(subject.getHtml(), containsString("\"http://server.com/test/path/\""));
   }
 
@@ -77,15 +74,15 @@ public class PiwikWebFooterTest {
 
     withServer("server.com");
 
-    PiwikWebFooter subject = new PiwikWebFooter(configuration);
+    PiwikWebFooter subject = new PiwikWebFooter(settings);
     assertThat(subject.getHtml(), containsString("\"http://server.com/\""));
   }
 
   private void withRelativePath(String path) {
-    when(configuration.getString(eq(PiwikPlugin.PIWIK_PATH_PROPERTY), anyString())).thenReturn(path);
+    settings.setProperty(PiwikPlugin.PIWIK_PATH_PROPERTY, path);
   }
 
   private void withValidWebsiteId() {
-    when(configuration.getString(eq(PiwikPlugin.PIWIK_WEBSITEID_PROPERTY), anyString())).thenReturn("TestId");
+    settings.setProperty(PiwikPlugin.PIWIK_WEBSITEID_PROPERTY, "TestId");
   }
 }

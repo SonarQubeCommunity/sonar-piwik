@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.piwik;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
+import org.sonar.api.config.Settings;
 import org.sonar.api.web.Footer;
 
 /**
@@ -32,26 +32,22 @@ import org.sonar.api.web.Footer;
  */
 public class PiwikWebFooter implements Footer {
 
-  private Configuration configuration;
+  private Settings settings;
 
-  public PiwikWebFooter(Configuration configuration) {
-    this.configuration = configuration;
+  public PiwikWebFooter(Settings settings) {
+    this.settings = settings;
   }
 
   protected String getIdAccount() {
-    return configuration.getString(PiwikPlugin.PIWIK_WEBSITEID_PROPERTY, "");
+    return settings.getString(PiwikPlugin.PIWIK_WEBSITEID_PROPERTY);
   }
 
   protected String getServer() {
-    return configuration.getString(PiwikPlugin.PIWIK_SERVER_PROPERTY, "");
+    return settings.getString(PiwikPlugin.PIWIK_SERVER_PROPERTY);
   }
 
   protected String getPath() {
-    return configuration.getString(PiwikPlugin.PIWIK_PATH_PROPERTY, "");
-  }
-
-  public String getKey() {
-    return "webfooter_" + PiwikPlugin.PIWIK_PLUGIN;
+    return settings.getString(PiwikPlugin.PIWIK_PATH_PROPERTY);
   }
 
   public String getHtml() {
@@ -61,14 +57,18 @@ public class PiwikWebFooter implements Footer {
       return null;
     }
     String serverPath = getServerPath();
-    return "<!-- Piwik -->\n" + "<script type=\"text/javascript\">\n"
-        + "var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://" + serverPath + "/\" : \"http://" + serverPath
-        + "/\");\n"
-        + "document.write(unescape(\"%3Cscript src='\" + pkBaseURL + \"piwik.js' type='text/javascript'%3E%3C/script%3E\"));\n"
-        + "</script><script type=\"text/javascript\">\n" + "try {\n" + "var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", "
-        + id + ");\n" + "piwikTracker.trackPageView();\n" + "piwikTracker.enableLinkTracking();\n" + "} catch( err ) {}\n"
-        + "</script><noscript><p><img src=\"http://" + serverPath + "/piwik.php?idsite=" + id
-        + "\" style=\"border:0\" alt=\"\"/></p></noscript>\n" + "<!-- End Piwik Tag -->";
+    return "<!-- Piwik -->\n"
+      + "<script type=\"text/javascript\">\n"
+      + "var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://" + serverPath + "/\" : \"http://" + serverPath
+      + "/\");\n"
+      + "document.write(unescape(\"%3Cscript src='\" + pkBaseURL + \"piwik.js' type='text/javascript'%3E%3C/script%3E\"));\n"
+      + "</script><script type=\"text/javascript\">\n"
+      + "try {\n"
+      + "var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", " + id + ");\n"
+      + "piwikTracker.trackPageView();\n" + "piwikTracker.enableLinkTracking();\n"
+      + "} catch( err ) {}\n"
+      + "</script><noscript><p><img src=\"http://" + serverPath + "/piwik.php?idsite=" + id + "\" style=\"border:0\" alt=\"\"/></p></noscript>\n"
+      + "<!-- End Piwik Tag -->";
   }
 
   private String getServerPath() {
@@ -77,11 +77,6 @@ public class PiwikWebFooter implements Footer {
       serverPath += "/" + getPath();
     }
     return serverPath;
-  }
-
-  @Override
-  public String toString() {
-    return getKey();
   }
 
 }
