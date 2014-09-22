@@ -6,18 +6,15 @@
     <groupId>org.codehaus.sonar-plugins</groupId>
     <artifactId>parent</artifactId>
     <version>13</version>
-    <relativePath>../parent</relativePath>
+    <relativePath/>
   </parent>
 
-  <groupId>org.codehaus.sonar-plugins</groupId>
   <artifactId>sonar-piwik-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
   <version>1.1-SNAPSHOT</version>
 
   <name>Piwik</name>
-  <description>Piwik (http://piwik.org/) is an open-source web analytics software that can be 
-  used as an alternative to Google Analytics, in particular for internal websites. The Piwik Plugin 
-  submits individual's browsing activity of the Sonar instance to a Piwik server.</description>
+  <description>Integrates with Piwik.</description>
   <url>http://docs.codehaus.org/display/SONAR/piwik+plugin</url>
   <inceptionYear>2010</inceptionYear>
   <organization>
@@ -52,13 +49,12 @@
     <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/14465</url>
   </issueManagement>
   <ciManagement>
-    <system>bamboo</system>
-    <url>http://bamboo.ci.codehaus.org/browse/SONAR-PIWIK</url>
+    <system>jenkins</system>
+    <url>https://sonarplugins.ci.cloudbees.com/job/piwik/</url>
   </ciManagement>
 
   <properties>
     <sonar.pluginClass>org.sonar.plugins.piwik.PiwikPlugin</sonar.pluginClass>
-    <sonar.pluginName>Piwik</sonar.pluginName>
     <sonar.version>2.1</sonar.version>
   </properties>
 
